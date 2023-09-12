@@ -1,0 +1,148 @@
+
+.App {
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+}
+
+.main--container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.top {
+  width: 100%;
+  height: calc(100% - 100px);
+}
+.bottom {
+  width: 100%;
+  height: 90px;
+  padding: 0 20px 20px 20px;
+}
+.left--container {
+  max-width: 260px;
+  height: 100%;
+  padding: 20px;
+}
+
+/* Sidebar */
+.sidebar--container {
+  width: 100%;
+  background: #0e0e0e8a;
+  box-shadow: 0 0 20px #00000062;
+  height: 100%;
+  border-radius: 10px;
+}
+.sidebar-inner--container {
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+}
+.logo--container {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px;
+}
+#logo {
+  width: 100%;
+  cursor: pointer;
+}
+.profile--container {
+  width: 100%;
+  height: 120px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.profile-avatar--container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #121212;
+}
+.profile-name--container {
+  width: 80%;
+  height: 20px;
+  background-color: #121212;
+}
+.nav-list--container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.nav-list-item {
+  cursor: pointer;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #dbdbdb;
+  padding: 0 16px 0 16px;
+  transition: all .5s ease;
+}
+.nav-list-item:hover {
+  opacity: .6;
+  transition: all .5s ease;
+}
+.nav-list-icon {
+  width: 16px;
+}
+.nav-list-p {
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* Playerbar */
+.playerbar--container {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: #0e0e0e8a;
+  box-shadow: 0 0 20px #00000062;
+}
+
+/* Login */
+.login--container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+}
+.login-central--container {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-header--container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#login-logo {
+  width: 300px;
+}
+.login-button {
+  cursor: pointer;
+  background: linear-gradient(90deg,#1DD460, #00531E);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 26px;
+  font-size: 15px;
+}
