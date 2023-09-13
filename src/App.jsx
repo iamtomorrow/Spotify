@@ -6,31 +6,51 @@ import { Sidebar } from './components/Sidebar'
 import { Login } from './Login';
 import { API } from './api/spotify';
 import { Searchbar } from './components/Searchbar';
+import { Homebar } from './components/HomeBar';
 
 function App() {
   const [ token, setToken ] = useState(window.localStorage.getItem("token"));
   const [ userInfo, setUserInfo ] = useState();
+  const [ myPlaylists, setMyPlaylists ] = useState();
 
-  useEffect(() => {
-    let hash = window.location.hash;
-    let accessToken = hash.split("&")[0].split("=")[1];
+  const [ bar, setBar ] = useState(1);
 
-    if (!token) {
-      setToken(accessToken);
-    }
-  }, []);
+  const handleChangeBar = ( key ) => {
+    setBar( key );
+  }
 
   useEffect(() => {
     const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
+    let accessToken = hash.split("&")[0].split("=")[1];
+    let token = window.localStorage.setItem("token", accessToken);
+
+    // console.log(token);
+    // console.log(accessToken);
 
     const getUser = async () => {
-      if (token) {
-        let data = await API.getUser(token);
+      if (!token) {
+        window.localStorage.setItem('token', accessToken);
+        setToken(accessToken);
+        let data = await API.getUser(accessToken);
+        setUserInfo(data)
+      } else {
+        setToken(accessToken);
+        let data = await API.getUser(accessToken);
         setUserInfo(data);
       }
     }
     getUser();
+  }, []);
+
+  useEffect(() => {
+    const getMyPlaylists = async ( ) => {
+      if (token) {
+        let data = await API.getMyPlaylists(token);
+        setMyPlaylists(data);
+        console.log(myPlaylists);
+      }
+    }
+    getMyPlaylists();
   }, []);
 
   if ( !token ) {
@@ -43,11 +63,16 @@ function App() {
         <div className='top'>
           <div className='left--container'>
             { userInfo &&
-              <Sidebar user={ userInfo ? userInfo : '' } />
+              <Sidebar user={ userInfo ? userInfo : '' } playlists={ myPlaylists } onClick={ handleChangeBar } />
             }
           </div>
           <div className='right--container'>
-            <Searchbar token={ token } />
+            { bar === 0 &&
+              <Homebar token={ token } />
+            }
+            { bar === 1 &&
+              <Searchbar token={ token } />
+            }
           </div>
         </div>
         <div className='bottom'>

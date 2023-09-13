@@ -9,6 +9,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background: var(--primary-color);
 }
 
 #root {
@@ -23,4 +24,10 @@ body {
 @font-face {
   font-family: EmiratesMedium;
   src: url('../src/assets/fonts/EmiratesMedium.ttf');
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    height: auto;
+  }
 }

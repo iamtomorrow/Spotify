@@ -25,6 +25,38 @@ export const API = {
         }
     },
 
+    getFeatured: async ( token ) => {
+        try {
+            let response = await fetch("https://api.spotify.com/v1/browse/featured-playlists", 
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            let data = await response.json();
+            return data;
+        } catch (err) {
+            return err;
+        }
+    },
+
+    getMyPlaylists: async ( token ) => {
+        try {
+            let response = await fetch("https://api.spotify.com/v1/me/playlists", 
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+            let data = await response.json();
+            return data.items;
+        } catch (err) {
+            return err;
+        }
+    },
+
     getArtists: async ( token, key ) => {
         try {
             let response = await fetch(`https://api.spotify.com/v1/search?q=${key}&type=artist&limit=5`, 
@@ -42,6 +74,22 @@ export const API = {
     },
 
     getAlbums: async ( token, key ) => {
+        try {
+            let response = await fetch(`https://api.spotify.com/v1/search?q=${key}&type=album&limit=5`, 
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            let data = await response.json();
+            return data.albums.items;
+        } catch (err) {
+            return err;
+        }
+    },
+
+    getPlaylists: async ( token, key ) => {
         try {
             let response = await fetch(`https://api.spotify.com/v1/search?q=${key}&type=playlist&limit=5`, 
             {
@@ -67,9 +115,9 @@ export const API = {
                 }
             })
             let data = await response.json();
-            data.tracks.items;
+            return data.tracks.items;
         } catch (err) {
             return err;
         }
-    }
+    },
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const ArtistItem = ( { artist } ) => {
+export const ArtistItem = ( { artist, loading } ) => {
     const [ artistImage, setArtistImage ] = useState("");
 
     useEffect(() => {
@@ -10,7 +10,7 @@ export const ArtistItem = ( { artist } ) => {
     }, [artist]);
 
     return (
-        <div className="artist-item--container" key={ artist.id }>
+        <div className="artist-item--container" key={ artist.id } style={{ opacity: loading ? 0.1 : ""}}>
             <div className="artist-item-inner--container">
                 <div className="artist-item-top">
                     <img className="artist-item-image" src={ artistImage } />

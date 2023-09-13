@@ -7,7 +7,8 @@ import { HomeIcon,
         RssIcon } from '@heroicons/react/outline';
 import Logo from '../assets/logo.png';
 
-export const Sidebar = ( { user } ) => {
+export const Sidebar = ( { user, playlists, onClick } ) => {
+
     return (
         <div className="sidebar--container">
             <div className="sidebar-inner--container">
@@ -23,12 +24,12 @@ export const Sidebar = ( { user } ) => {
                     </div>
                 </div>
                 <div className="nav-list--container">
-                    <div className="nav-list-item">
+                    <div className="nav-list-item" onClick={ () => onClick(0) }>
                         <HomeIcon className='nav-list-icon' />
                         <p className='nav-list-p'>Home</p>
                     </div>
                     <div className="nav-list-item">
-                        <SearchIcon className='nav-list-icon' />
+                        <SearchIcon className='nav-list-icon' onClick={ () => onClick(1) } />
                         <p className='nav-list-p'>Search</p>
                     </div>
                     <div className="nav-list-item">
@@ -46,6 +47,14 @@ export const Sidebar = ( { user } ) => {
                     <div className="nav-list-item">
                         <RssIcon className='nav-list-icon' />
                         <p className='nav-list-p'>Your Episodes</p>
+                    </div>
+
+                    <div className='my-playlists--container'>
+                        { playlists &&
+                            playlists.map(item => (
+                                <p>k</p>
+                            ))
+                        }
                     </div>
                     
                 </div>
