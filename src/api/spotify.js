@@ -5,9 +5,6 @@ const REDIRECT_URI = 'http://localhost:5173/'
 const RESPONSE_TYPE = 'token';
 
 export const Signin = ( ) => {
-    const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
-
     const URL = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`
     window.location.href = URL;
 }
@@ -22,8 +19,55 @@ export const API = {
                 }
             })
             let data = await response.json();
-            console.log("d");
             return data;
+        } catch (err) {
+            return err;
+        }
+    },
+
+    getArtists: async ( token, key ) => {
+        try {
+            let response = await fetch(`https://api.spotify.com/v1/search?q=${key}&type=artist&limit=5`, 
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            let data = await response.json();
+            return data.artists.items;
+        } catch (err) {
+            return err;
+        }
+    },
+
+    getAlbums: async ( token, key ) => {
+        try {
+            let response = await fetch(`https://api.spotify.com/v1/search?q=${key}&type=playlist&limit=5`, 
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            let data = await response.json();
+            return data.playlists.items;
+        } catch (err) {
+            return err;
+        }
+    },
+
+    getSongs: async ( token, key ) => {
+        try {
+            let response = await fetch(`https://api.spotify.com/v1/search?q=${key}&type=track&limit=5`, 
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            let data = await response.json();
+            data.tracks.items;
         } catch (err) {
             return err;
         }

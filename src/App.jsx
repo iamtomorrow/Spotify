@@ -5,10 +5,11 @@ import { Playerbar } from './components/Playerbar'
 import { Sidebar } from './components/Sidebar'
 import { Login } from './Login';
 import { API } from './api/spotify';
+import { Searchbar } from './components/Searchbar';
 
 function App() {
   const [ token, setToken ] = useState(window.localStorage.getItem("token"));
-  const [ data, setData ] = useState();
+  const [ userInfo, setUserInfo ] = useState();
 
   useEffect(() => {
     let hash = window.location.hash;
@@ -17,22 +18,23 @@ function App() {
     if (!token) {
       setToken(accessToken);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
+    const hash = window.location.hash;
+    let token = window.localStorage.getItem("token");
+
     const getUser = async () => {
       if (token) {
-        setData(API.getUser(token));
-        console.log("data", data);
+        let data = await API.getUser(token);
+        setUserInfo(data);
       }
     }
     getUser();
-  }, [])
+  }, []);
 
   if ( !token ) {
     return <Login />
-  } else {
-    console.log(token);
   }
 
   return (
@@ -40,7 +42,12 @@ function App() {
       <main className='main--container'>
         <div className='top'>
           <div className='left--container'>
-            <Sidebar />
+            { userInfo &&
+              <Sidebar user={ userInfo ? userInfo : '' } />
+            }
+          </div>
+          <div className='right--container'>
+            <Searchbar token={ token } />
           </div>
         </div>
         <div className='bottom'>

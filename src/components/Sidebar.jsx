@@ -7,7 +7,7 @@ import { HomeIcon,
         RssIcon } from '@heroicons/react/outline';
 import Logo from '../assets/logo.png';
 
-export const Sidebar = ( ) => {
+export const Sidebar = ( { user } ) => {
     return (
         <div className="sidebar--container">
             <div className="sidebar-inner--container">
@@ -16,10 +16,10 @@ export const Sidebar = ( ) => {
                 </div>
                 <div className='profile--container'>
                     <div className='profile-avatar--container'>
-
+                        <img className='profile-avatar' src={ user.images[1].url } />
                     </div>
                     <div className='profile-name--container'>
-
+                        <p className='profile-name'>{ user.display_name }</p>
                     </div>
                 </div>
                 <div className="nav-list--container">
